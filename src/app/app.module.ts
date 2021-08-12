@@ -14,12 +14,16 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { UserRegistrationFormComponent } from './uer-registration-form/user-registration-form.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserRegistrationFromComponent
+    UserRegistrationFromComponent,
+    MovieCardComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

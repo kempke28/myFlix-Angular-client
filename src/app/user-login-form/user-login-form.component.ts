@@ -33,7 +33,7 @@ loginUser(): void {
      this.dialogRef.close(); // This will close the modal on success!
      localStorage.setItem('user', response.user.Username);
      localStorage.setItem('token', response.token);
-     this.snackBar.open( 'user log in succesfully', 'OK', {
+     this.snackBar.open( 'user log in successfully', 'OK', {
         duration: 2000
      });
     }, (response) => {
