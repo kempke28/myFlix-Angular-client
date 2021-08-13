@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service'
-\\\\\\
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { getAllMoviesService } from '../fetch-api-data.service'
+import { addFavoriteMovie } from '../fetch-api-data.service';
+
+import { MovieDirectorDialogComponent } from '../movie-director-dialog/movie-director-dialog.component';
+import { MovieGenreDialogComponent } from '../movie-genre-dialog/movie-genre-dialog.component';
+
 
 @Component({
   selector: 'app-movie-card',
@@ -9,17 +15,50 @@ import { FetchApiDataService } from '../fetch-api-data.service'
 })
 export class MovieCardComponent {
   movies: any[] = [];
-  constructor(public fetchApiData: FetchApiDataService) { }
+  constructor(
+    public fetchApiDataMovies: getAllMoviesService,
+    public fetchApiDataMovieFavs: addFavoriteMovie,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    ) { }
 
-ngOnInit(): void {
-  this.getMovies();
-}
-
-getMovies(): void {
-  this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
-      return this.movies;
-    });
+  ngOnInit(): void {
+    this.getMovies();
   }
+
+  getMovies(): void {
+    this.fetchApiDataMovies.getAllMovies().subscribe((response: any) => {
+        this.movies = response;
+        console.log(this.movies);
+        return this.movies;
+      });
+    }
+
+  showGenreDialog(name: string, description: string): void {
+    this.dialog.open(MovieGenreDialogComponent, {
+      data: { name, description },
+      });
+  }
+
+  showDirectorDialog(
+    name: string,
+    bio: string,
+  ): void {
+    this.dialog.open(MovieDirectorDialogComponent, {
+      data: { name, bio },
+      });
+  }
+
+  addFavoriteMovie(id: string, title: string): void {
+    this.fetchApiDataMovieFavs.addFavoriteMovies(id).subscribe((response: any) => {
+      console.log(response);
+      let favMovies = response.FavoriteMovies;
+      localStorage.setItem('FavoriteMovies', favMovies);
+      this.snackBar.open('The movie has been added to the list', 'OK', {
+        duration: 2000,
+      });
+    });
+
+  }
+
 }
