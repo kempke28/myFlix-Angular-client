@@ -6,6 +6,13 @@ import { map } from 'rxjs/operators';
 
 
 const apiUrl = 'https://movie-api-1.herokuapp.com/';
+
+
+/**
+ * User registration
+   * API call to the user registration endpoint.
+   * @param userDetails
+   */
 @Injectable({
   providedIn: 'root'
 })
@@ -33,8 +40,15 @@ private handleError(error: HttpErrorResponse): any {
   }
 }
 
-  //User Login
-@Injectable({
+
+
+
+  /**
+ * User login
+   * API call to the user login endpoint.
+   * @param userDetails
+   */
+   @Injectable({
   providedIn: 'root'
 })
 export class UserLoginService {
@@ -58,14 +72,18 @@ export class UserLoginService {
   }
 }
 
-  //Get all movies
+  /**
+   * Get all movies
+   * API call to get all movies from endpoint
+   * @returns array of movies
+   */
   @Injectable({
   providedIn: 'root'
 })
 export class getAllMoviesService {
   constructor(private http: HttpClient) { }
-
   public getAllMovies(): Observable<any> {
+ console.log("here I am");
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', { headers: new HttpHeaders({ Authorization: 'Bearer ' + token,})
       })
@@ -91,7 +109,11 @@ export class getAllMoviesService {
 }
 
 
-  // get one movie end-point
+  /**
+   * get one movie
+   * making the call to get one a specific movie from endpoint
+   * @returns movie 
+   */
   @Injectable({
   providedIn: 'root'
 })
@@ -126,7 +148,11 @@ export class GetOneMoviesService {
   }
 }
   
-  //Get director
+/**
+   * get Director from one movie
+   * making the call to get one the director of specific movie 
+   * @returns director movie
+   */
   @Injectable({
   providedIn: 'root'
 })
@@ -163,7 +189,11 @@ export class GetDirectorService {
 }
 
 
-  //  Get genre
+  /**
+   * get Genre from one movie
+   * making the call to get one the Genre of specific movie 
+   * @returns Genre movie
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -199,7 +229,11 @@ export class GetDirectorService {
   }
   
 
-  //  Get user
+  /**
+   * get user by username
+   * making the call to get one user by username
+   * @returns specific user
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -235,7 +269,11 @@ export class GetDirectorService {
   }
 
   
-  //  Get favourite movies for a user
+  /**
+   * get favorites movies of user
+   * making the call to get favorites movies
+   * @return array of movies of user
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -271,7 +309,11 @@ export class GetDirectorService {
   }
   
   
-  // Add a movie to favourite Movies
+   /**
+   * add movie to users favorite
+   * making the call to add movies to favorites
+   * @param {string} id from movie
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -306,7 +348,11 @@ export class GetDirectorService {
     }
   }
   
-  //Edit user
+  /**
+   * edit user data
+   * making the call to edit user by username
+   * @param userDetails
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -341,8 +387,11 @@ export class GetDirectorService {
     }
   }
   
-  //Delete user
-
+    /**
+   * delete user data
+   * making the call to delete user by username
+   * @return deleted user
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -377,8 +426,11 @@ export class GetDirectorService {
     }
   }
 
-  //Delete a movie from the favorite movies
-
+  /**
+   * delete movie from users favorite list
+   * making the call to delete movie from favs
+   * @return movie removed from favs
+   */
   @Injectable({
     providedIn: 'root'
   })
@@ -412,4 +464,6 @@ export class GetDirectorService {
       return throwError('Something bad happened; please try again later');
     }
   }
-
+  export class FetchApiDataService {
+    constructor() { }
+  }

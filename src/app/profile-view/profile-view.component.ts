@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 // This import brings in the API calls we created in 6.2
-import { getUserService } from '../fetch-api-data.service';
+import { getUserService, getAllMoviesService, editUser, deleteMovie } from '../fetch-api-data.service';
 import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
 
 
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-view',
@@ -18,49 +19,55 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 export class ProfileViewComponent implements OnInit {
 
+  user: any = {};
+  movies: any = [];
+  favorites: any = [];
+
   constructor(
     public fetchApiDataUser: getUserService,
-    public dialogRef: MatDialogRef<ProfileViewComponent>,
+    public fetchApiDataGetAllMovies: getAllMoviesService,
+    public fetchApiDeleteFavMovie: deleteMovie,
+
+    public router: Router,
+    public dialog: MatDialog,
     public snackBar: MatSnackBar) { }
   
 
   ngOnInit(): void {
+    this.getUser()
   }
 
   getUser(): void {
-    let FavoriteMovies = localStorage.getItem('FavoriteMovies');
-    let Username = localStorage.getItem('user');
-    let Email = localStorage.getItem('Email');
-    let Birthday = localStorage.getItem('Birthday');
-    this.getuser = {
-      "FavoriteMovies": FavoriteMovies,
-      "Username": Username,
-      "Email": Email,
-      "Birthday": Birthday,
-    }
-    this.getUser();
+    this.fetchApiDataUser.getUser().subscribe((resp: any) => {
+      this.user = resp;
+      this.getFavoriteMovies();
+    });
   }
 
-  deleteUser(): void {
-    let check = confirm(
-      'This will delete your profile! Are you sure you want to continue?'
-    );
-    if (check) {
-      this.fetchApiData3.deleteUser().subscribe(() => {
-        localStorage.clear();
-        this.router.navigate(['welcome']);
-        this.snackBar.open('Profile deleted', 'OK', {
-          duration: 2000,
-        });
-      });
-    } else {
-      window.location.reload();
-    }
-  }
- 
-  editUser(): void {
+
+  ProfileUpdate(): void {
     this.dialog.open(ProfileUpdateComponent, {
-      width: '400px'
+      width: '280px',
+    });
+  }
+
+  getFavoriteMovies(): void {
+    this.fetchApiDataGetAllMovies.getAllMovies().subscribe((res: any) => {
+      this.movies = res;
+    });
+  }
+
+    
+  deleteFromFavorites(_id: string, title: string): void {
+    this.fetchApiDeleteFavMovie.deleteMovie().subscribe(() => {
+      this.snackBar.open(
+        `${title} has been removed`, 'OK', {
+        duration: 2000,
+      }
+      );
+      setTimeout(function () {
+        window.location.reload();
+      }, 1000);
     });
   }
 }

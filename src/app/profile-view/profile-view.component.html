@@ -1,1 +1,66 @@
-<p>profile-view works!</p>
+<div class="background">
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title class="profile-title">
+          Profile Details
+        </mat-card-title>
+      </mat-card-header>
+      
+      <hr>
+      <mat-card-content>
+        Username: {{ user.Username }}
+      </mat-card-content>
+
+      <mat-card-content>
+        Password: ********
+      </mat-card-content>
+
+      <mat-card-content>
+        Email: {{ user.Email }}
+      </mat-card-content>
+
+      <mat-card-content>
+        Birthday: {{ user.Birthday | date : 'MM/dd/yyyy' : 'UTC' }}
+      </mat-card-content>
+
+      <mat-card-actions>
+
+        <div class="profile-buttons">
+          <button class="update-button" mat-raised-button (click)="openUpdateViewDialog()">
+            Update Profile
+          </button>
+
+          <button class="delete-button" mat-raised-button (click)="deleteProfile()">
+            Delete Profile
+          </button>
+
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  
+    <!-- Favourites -->
+    <mat-card class="favourite-container">
+      <mat-card-header>
+        <mat-card-title class="favourite-title">
+          Your Favorite Movies
+        </mat-card-title>
+      </mat-card-header>
+
+      <hr>
+      <div class="favourite-cards">
+        <mat-card *ngFor="let favorite of favorites;" class="favourite-card">
+          <mat-card-header class="favourite-card-title">
+            <mat-card-title>{{favorite.Title}}</mat-card-title>
+          </mat-card-header>
+          <img src={{favorite.ImagePath}} alt={{favorite.Title}} />
+          <div class="delete-favourite-button" (click)="removeFromFavorites(favorite._id, favorite.Title)">
+            <mat-icon mat-button>delete_forever</mat-icon>
+            <h4 class="delete-favourite-text">
+              Remove
+            </h4>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card>
+  
+  </div>
