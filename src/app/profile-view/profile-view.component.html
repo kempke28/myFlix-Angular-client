@@ -26,11 +26,11 @@
       <mat-card-actions>
 
         <div class="profile-buttons">
-          <button class="update-button" mat-raised-button (click)="openUpdateViewDialog()">
+          <button class="update-button" mat-raised-button (click)="ProfileUpdate()">
             Update Profile
           </button>
 
-          <button class="delete-button" mat-raised-button (click)="deleteProfile()">
+          <button class="delete-button" mat-raised-button (click)="deleteUser()">
             Delete Profile
           </button>
 
@@ -53,7 +53,7 @@
             <mat-card-title>{{favorite.Title}}</mat-card-title>
           </mat-card-header>
           <img src={{favorite.ImagePath}} alt={{favorite.Title}} />
-          <div class="delete-favourite-button" (click)="removeFromFavorites(favorite._id, favorite.Title)">
+          <div class="delete-favourite-button" (click)="deleteFromFavorites(favorite._id, favorite.Title)">
             <mat-icon mat-button>delete_forever</mat-icon>
             <h4 class="delete-favourite-text">
               Remove

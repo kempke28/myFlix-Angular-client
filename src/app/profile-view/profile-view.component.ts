@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // This import brings in the API calls we created in 6.2
-import { getUserService, getAllMoviesService, editUser, deleteMovie } from '../fetch-api-data.service';
+import { getUserService, getAllMoviesService, editUser, deleteMovie, deleteUser } from '../fetch-api-data.service';
 import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
 
 
@@ -27,6 +27,7 @@ export class ProfileViewComponent implements OnInit {
     public fetchApiDataUser: getUserService,
     public fetchApiDataGetAllMovies: getAllMoviesService,
     public fetchApiDeleteFavMovie: deleteMovie,
+    public fetchApiDeleteUser: deleteUser,
 
     public router: Router,
     public dialog: MatDialog,
@@ -70,4 +71,21 @@ export class ProfileViewComponent implements OnInit {
       }, 1000);
     });
   }
+
+  deleteUser(): void {
+    let confirmDelete = confirm("Are you sure you want to delete your profile?");
+    if (confirmDelete) {
+      this.fetchApiDeleteUser.deleteUser().subscribe(() => {
+        console.log('Profile Deleted');
+        localStorage.clear();
+        this.router.navigate(['/welcome']);
+        this.snackBar.open('Profile Deleted', 'OK', {
+          duration: 2000,
+        });
+      });
+    } else {
+      window.location.reload();
+    }
+  }
+
 }

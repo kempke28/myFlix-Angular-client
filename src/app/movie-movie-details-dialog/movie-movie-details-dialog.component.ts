@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-movie-movie-details-dialog',
+  selector: 'app-details-dialog',
   templateUrl: './movie-movie-details-dialog.component.html',
-  styleUrls: ['./movie-movie-details-dialog.component.scss']
+  styleUrls: ['./movie-movie-details-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class MovieMovieDetailsDialogComponent implements OnInit {
 
-  constructor() { }
+export class MovieDetailsDialogComponent implements OnInit {
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      title: string;
+      imagePath: string;
+      description: string;
+      director: string;
+      genre: string;
+    }
+  ) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
