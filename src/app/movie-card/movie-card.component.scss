@@ -1,0 +1,22 @@
+.movie-container {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    margin: 20px auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.movie-container-info {
+    max-width: 300px;
+    margin: 20px;
+    flex: wrap;
+}
+mat-card-header {
+    justify-content: center;
+}
+.movie-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

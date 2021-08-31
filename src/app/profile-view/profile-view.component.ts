@@ -58,6 +58,13 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+
+  filterFavorites(): void {
+    this.favorites = this.movies.filter((movie: any) =>
+      this.user.FavMovies.includes(movie._id)
+    );
+    return this.favorites;
+  }
     
   deleteFromFavorites(_id: string, title: string): void {
     this.fetchApiDeleteFavMovie.deleteMovie().subscribe(() => {

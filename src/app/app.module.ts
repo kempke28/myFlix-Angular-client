@@ -25,11 +25,13 @@ import { MovieGenreDialogComponent } from './movie-genre-dialog/movie-genre-dial
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 import { MovieDetailsDialogComponent } from './movie-movie-details-dialog/movie-movie-details-dialog.component';
-
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: ProfileViewComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 @NgModule({
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
     ProfileViewComponent,
     ProfileUpdateComponent,
     MovieDetailsDialogComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +62,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatSnackBarModule,
     RouterModule.forRoot(appRoutes),
-    MatIconModule
-
-
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

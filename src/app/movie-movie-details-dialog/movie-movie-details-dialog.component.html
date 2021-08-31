@@ -1,17 +1,14 @@
-<div class='details-container'>
-  <button id="close-button" mat-icon-button color='dark' [mat-dialog-close]='true'>
-    <mat-icon>close</mat-icon>
-  </button>
+  <mat-toolbar>
 
-  <img src={{data.imagePath}} alt={{data.title}} style="max-width:150px; align-self: center;" />
-  <h1>{{data.title}}</h1>
+    <mat-toolbar-row class="genre-container">
+      <h4>{{ data.title }}</h4>
+      <button mat-icon-button aria-label="Close" mat-dialog-close color="primary" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar-row>
 
-  <p>DIRECTOR </p>
-  <p class="data">{{data.genre}}</p>
+  </mat-toolbar>
 
-  <p>GENRE</p>
-  <p class="data">{{data.director}}</p>
-
-  <p>SYNOPSIS</p>
-  <p class="data">{{data.description}}</p>
-</div>
+  <mat-dialog-content>
+    {{ data.description }}
+  </mat-dialog-content>

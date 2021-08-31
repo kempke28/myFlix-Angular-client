@@ -1,0 +1,16 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-around ;
+    top: 0;
+    width: 100vw;
+    z-index: 9;
+    background-color: #2cbd50;
+  }
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+  
+    padding: 12px
+}

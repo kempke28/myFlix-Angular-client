@@ -1,27 +1,39 @@
-<div style="display: flex;">
-    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
-        <mat-card-header>
-        <mat-card-title>{{movie.Title}}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-        </mat-card-header>
-        <img src={{movie.ImagePath}} alt= {{movie.Title}} />
-        <mat-card-actions>
-            <button
-                mat-button
-                color="primary"
-                (click)="showGenreDialog"
-            >
-                Genre
-            </button>
-            <button
-                mat-button
-                color="primary"
-                (click)="showDirectorDialog"
-            >
-                Director
-            </button>
-           
-            <mat-icon>favorite_border</mat-icon>
-        </mat-card-actions>
-    </mat-card>
+
+<div style="display: block;">
+    <app-navigation-bar></app-navigation-bar>
+    <div class="movie-container">
+        <mat-card class="movie-container-info" *ngFor="let movie of movies;" style="flex: 1 1 auto;">
+            <mat-card-header>
+            <mat-card-title>{{movie.Title}}</mat-card-title>
+                <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img class="movie-image" src={{movie.ImagePath}} alt= {{movie.Title}} />
+            <mat-card-actions>
+                <button
+                    mat-button
+                    color="primary"
+                    (click)="showGenreDialog(movie.Genre.Name, movie.Genre.Description)"
+                >
+                    Genre
+                </button>
+                <button
+                    mat-button
+                    color="primary"
+                    (click)="showDirectorDialog(movie.Director.Name, movie.Director.Bio)"
+                >
+                    Director
+                </button>
+
+                <button mat-button color="primary" 
+                    (click)="movieDetails(movie.Title, movie.Description)">
+                    Details
+                </button>
+            
+                <button mat-fab (click)="addFavoriteMovie(movie.id, movie.title)">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+                
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

@@ -1,0 +1,5 @@
+ng deploy --base-href=/myFlix-Angular-client/
+
+https://kempke28.github.io/myFlix-Angular-client/
+
+https://<GitHub-username>.github.io/<repository-name>/
