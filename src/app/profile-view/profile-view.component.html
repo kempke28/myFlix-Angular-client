@@ -55,7 +55,7 @@
             <mat-card-title>{{favorite.Title}}</mat-card-title>
           </mat-card-header>
           <img src={{favorite.ImagePath}} alt={{favorite.Title}} />
-          <div class="delete-favourite-button" (click)="deleteFromFavorites(favorite._id, favorite.Title)">
+          <div class="delete-favourite-button" (click)="deleteFavMovie(favorite.id, favorite.Title)">
             <mat-icon mat-button>delete_forever</mat-icon>
             <h4 class="delete-favourite-text">
               Remove
