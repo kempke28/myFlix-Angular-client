@@ -325,7 +325,7 @@ export class GetDirectorService {
     public addFavoriteMovie(_id:string): Observable<any> {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('user');
-      return this.http.patch(apiUrl + `users/${username}/movies/${_id}`, _id, {
+      return this.http.patch(apiUrl + `users/${username}/favorites/${_id}`, _id, {
           headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
           })
