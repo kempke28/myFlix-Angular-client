@@ -42,7 +42,6 @@ export class ProfileViewComponent implements OnInit {
     this.fetchApiDataUser.getUser().subscribe((resp: any) => {
       this.user = resp;
       this.getFavoriteMovies();
-      this.filterFavorites();
     });
   }
 
@@ -56,6 +55,7 @@ export class ProfileViewComponent implements OnInit {
   getFavoriteMovies(): void {
     this.fetchApiDataGetAllMovies.getAllMovies().subscribe((res: any) => {
       this.movies = res;
+      this.filterFavorites();
     });
   }
 
@@ -64,7 +64,6 @@ export class ProfileViewComponent implements OnInit {
     this.favorites = this.movies.filter((movie: any) =>
       this.user.FavMovies.includes(movie._id)
     );
-    return this.favorites;
   }
     
   deleteFavMovie(id: string, title: string): void {
