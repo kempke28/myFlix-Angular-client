@@ -55,8 +55,8 @@ export class MovieCardComponent implements OnInit{
     });
   }
 
-  addFavoriteMovie(id: string): void {
-    this.fetchApiDataMovieFavs.addFavoriteMovie(id).subscribe((response: any) => {
+  addFavoriteMovie(_id: string): void {
+    this.fetchApiDataMovieFavs.addFavoriteMovie(_id).subscribe((response: any) => {
       console.log(response);
       let favMovies = response.FavoriteMovies;
       localStorage.setItem('FavoriteMovies', favMovies);
