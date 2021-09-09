@@ -35,13 +35,14 @@ export class ProfileViewComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getUser()
+    this.getUser();
   }
 
   getUser(): void {
     this.fetchApiDataUser.getUser().subscribe((resp: any) => {
       this.user = resp;
       this.getFavoriteMovies();
+      this.filterFavorites();
     });
   }
 
