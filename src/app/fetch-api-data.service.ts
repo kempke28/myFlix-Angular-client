@@ -351,6 +351,41 @@ export class GetDirectorService {
     }
   }
   
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RemoveFavoriteMovie {
+    constructor(private http: HttpClient) { }
+  
+    public RemoveFavoriteMovie(_id:string): Observable<any> {
+      const token = localStorage.getItem('token');
+      const username = localStorage.getItem('user');
+      return this.http.delete(apiUrl + `users/${username}/favorites/${_id}`, {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        })
+        .pipe(catchError(this.handleError));
+    }
+    // non-typed response extraction
+    private extractResponseData(res: Response | {}): Response | {} {
+      console.log(res);
+      const body = res;
+      return body || {};
+    }
+  
+    private handleError(error: HttpErrorResponse): any {
+      if (error.error instanceof ErrorEvent) {
+        console.error('An error occurred: ', error.error.message);
+      } else {
+        console.error(
+          `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        );
+      }
+      return throwError('Something bad happened; please try again later');
+    }
+  }
+
   /**
    * edit user data
    * making the call to edit user by username
@@ -406,46 +441,6 @@ export class GetDirectorService {
       const token = localStorage.getItem('token');
       const username = localStorage.getItem('user');
       return this.http.delete(apiUrl + `users/${username}`, {
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + token,
-          })
-        })
-        .pipe(map(this.extractResponseData), catchError(this.handleError));
-    }
-    // non-typed response extraction
-    private extractResponseData(res: Response | {}): Response | {} {
-      console.log(res);
-      const body = res;
-      return body || {};
-    }
-  
-    private handleError(error: HttpErrorResponse): any {
-      if (error.error instanceof ErrorEvent) {
-        console.error('An error occurred: ', error.error.message);
-      } else {
-        console.error(
-          `Error status code ${error.status}, ` + `Error body is ${error.error}`
-        );
-      }
-      return throwError('Something bad happened; please try again later');
-    }
-  }
-
-  /**
-   * delete movie from users favorite list
-   * making the call to delete movie from favs
-   * @return movie removed from favs
-   */
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class deleteFavMovie {
-    constructor(private http: HttpClient) { }
-  
-    public deleteFavMovie(_id:string): Observable<any> {
-      const token = localStorage.getItem('token');
-      const username = localStorage.getItem('user');
-      return this.http.delete(apiUrl + `users/${username}/${_id}`, {
           headers: new HttpHeaders({
             Authorization: 'Bearer ' + token,
           })

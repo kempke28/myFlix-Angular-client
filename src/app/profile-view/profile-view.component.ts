@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // This import brings in the API calls we created in 6.2
-import { getUserService, getAllMoviesService, editUser, deleteFavMovie, deleteUser } from '../fetch-api-data.service';
+import { getUserService, getAllMoviesService, editUser, RemoveFavoriteMovie, deleteUser } from '../fetch-api-data.service';
 import { ProfileUpdateComponent } from '../profile-update/profile-update.component';
 
 
@@ -26,7 +26,7 @@ export class ProfileViewComponent implements OnInit {
   constructor(
     public fetchApiDataUser: getUserService,
     public fetchApiDataGetAllMovies: getAllMoviesService,
-    public fetchApiDeleteFavMovie: deleteFavMovie,
+    public fetchApiDeleteFavMovie: RemoveFavoriteMovie,
     public fetchApiDeleteUser: deleteUser,
 
     public router: Router,
@@ -66,8 +66,8 @@ export class ProfileViewComponent implements OnInit {
     );
   }
     
-  deleteFavMovie(id: string, title: string): void {
-    this.fetchApiDeleteFavMovie.deleteFavMovie(id).subscribe(() => {
+  RemoveFavoriteMovie(_id: string, title: string): void {
+    this.fetchApiDeleteFavMovie.RemoveFavoriteMovie(_id).subscribe(() => {
       this.snackBar.open(
         `${title} has been removed`, 'OK', {
         duration: 2000,
